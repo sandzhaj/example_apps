@@ -1,0 +1,54 @@
+<!--Должен лежать в ~/.m2/-->
+<!--Или запускай с указанием пути к файлу: mvn clean install -s /path/to/custom-settings.xml-->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <servers>
+        <server>
+            <id>my-repo</id>
+            <username>my-username</username>
+            <password>my-password</password>
+        </server>
+
+        <server>
+            <id>my-snapshots</id>
+            <username>my-username</username>
+            <password>my-password</password>
+        </server>
+    </servers>
+
+    <profiles>
+        <profile>
+            <id>release-repo</id>
+            <repositories>
+                <repository>
+                    <id>my-repo</id>
+                    <url>https://nexus.example.com/repository/releases/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>my-snapshots</id>
+                    <url>https://nexus.example.com/repository/snapshots/</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+
+    <activeProfiles>
+        <activeProfile>release-repo</activeProfile>
+    </activeProfiles>
+
+</settings>

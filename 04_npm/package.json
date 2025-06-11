@@ -1,0 +1,13 @@
+{
+  "name": "my-npm-app",
+  "version": "1.0.0",
+  "description": "Пример минимального проекта с npm",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "echo \"Сборка не требуется для этого проекта\"",
+    "test": "echo \"Нет тестов\" && exit 0"
+  },
+  "author": "Автор",
+  "license": "MIT"
+}

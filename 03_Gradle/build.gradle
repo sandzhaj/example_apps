@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'com.example.App'
+}
+
+dependencies {
+    // Здесь можно добавить зависимости, например:
+    // implementation 'org.apache.commons:commons-lang3:3.12.0'
+}
