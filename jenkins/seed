@@ -1,0 +1,15 @@
+pipelineJob('my-pipeline') {
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        url('https://github.com/user/repo.git')
+                    }
+                    branches('main')
+                }
+                scriptPath('Jenkinsfile')
+            }
+        }
+    }
+}

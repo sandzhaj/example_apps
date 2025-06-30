@@ -1,0 +1,12 @@
+job('hello-world') {
+    description('Простой джоб, который говорит привет')
+    scm {
+        git('https://github.com/user/repo.git')
+    }
+    triggers {
+        scm('H/5 * * * *')
+    }
+    steps {
+        shell('echo Hello from Jenkins DSL!')
+    }
+}

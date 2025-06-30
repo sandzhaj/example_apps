@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = 'my-app'
+    }
+
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
+    parameters {
+        string(name: "VERSION", defaultValue: "2.0.0", description: "Версия сборки")
+        booleanParam(name: "SKIP_TESTS", defaultValue: false, description: "Пропустить тесты?")
+        choice(name: "ENV", choices: ["dev", "stage", "prod"], description: "Окружение")
+    }
+
+
+    stages {
+        stage('Клонирование') {
+            steps {
+                echo '📥 Клонируем репозиторий...'
+                git url: 'https://github.com/sandzhaj/example_apps.git', branch: 'main'
+            }
+        }
+
+        stage('Сборка') {
+            steps {
+                script {
+                    echo "🔧 Собираем проект ${env.APP_NAME}..."
+                    echo "Параметры ${params.SKIP_TESTS}, ${params.VERSION}, ${params.ENV},"
+                    sh "echo ./build.sh > myapp.jar"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '✅ Прогоняем тесты...'
+                sh 'echo ./run-tests.sh'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo '📦 Упаковываем приложение...'
+                sh 'tar -czf app.tar.gz myapp.jar'
+                archiveArtifacts artifacts: 'app.tar.gz'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo '🧹 Чистим временные файлы...'
+            sh 'rm -rf ./'
+        }
+    }
+}
