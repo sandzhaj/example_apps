@@ -1,0 +1,7 @@
+projects:
+  my-project-1:
+    pipe: true
+  my-project-2:
+    pipe: false
+  my-project-3:
+    pipe: true
