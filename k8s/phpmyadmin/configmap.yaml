@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: phpmyadmin
+data:
+  MYSQL_ROOT_PASSWORD: "root"
+  MYSQL_DATABASE: "test"
+  MYSQL_USER: "admin"
+  MYSQL_PASSWORD: "admin"
+  PMA_HOST: "mariadb"          # имя сервиса базы данных
+  PMA_USER: "admin"       # логин из блока db
+  PMA_PASSWORD: "admin"   # пароль из блока db
+  PMA_ARBITRARY: "1"      # позволяет подключаться к другим БД при необходимости
