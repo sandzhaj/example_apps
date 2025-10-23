@@ -1,0 +1,25 @@
+
+istio:
+  enabled: true
+
+projects:
+  project-payment:
+    ci_pipe: true
+    deployments:
+      payment-api:
+        enabled: true
+        image: nginx:alpine
+        replicas: 2
+  project-comments:
+    ci_pipe: true
+    deployments:
+      myapp1:
+        enabled: true
+        image: nginx:alpine
+        replicas: 2
+      myapp2:
+        enabled: false
+        image: nginx:alpine
+        replicas: 2
+  project-sda:
+    ci_pipe: true

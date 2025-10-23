@@ -1,0 +1,23 @@
+{{- range $projectName, $project := .Values.projects }}
+  {{- range $appName, $app := $project.deployments }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $appName }}
+  namespace: {{ $projectName }}
+spec:
+  replicas: {{ $app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ $appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ $appName }}
+    spec:
+      containers:
+        - name: {{ $appName }}
+          image: {{ $app.image }}
+---
+  {{- end }}
+{{- end }}

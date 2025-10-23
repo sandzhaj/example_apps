@@ -1,0 +1,7 @@
+{{- range $projectName, $project := .Values.projects }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $projectName }}
+---
+{{- end }}
